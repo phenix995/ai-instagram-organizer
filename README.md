@@ -68,7 +68,7 @@ An AI-powered tool that automatically organizes your photos into Instagram-ready
 
    ```bash
    # Run setup script (new users)
-   python setup_llama.py
+   python utils/setup_llama.py
 
    # Or set environment variable manually
    export LLAMA_API_KEY="your-api-key-here"
@@ -232,13 +232,13 @@ instagram_posts_[timestamp]/
 
 ```bash
 # First-time setup
-python setup_llama.py
+python utils/setup_llama.py
 
 # Migrate from Gemini/Ollama
-python migrate_to_llama.py
+python utils/migrate_to_llama.py
 
 # Test API connection
-python test_llama_api.py
+python tests/test_llama_api.py
 ```
 
 ## 🎯 Use Cases
