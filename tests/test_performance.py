@@ -36,7 +36,7 @@ def test_performance():
         print("-" * 30)
         
         # Add source folder
-        cmd = ["python", "instagram_organizer.py"] + config["args"] + ["--source", "/Users/summthak/Nihal Camera Photos - Hawaii"]
+        cmd = ["python", "ai_instagram_organizer.py"] + config["args"] + ["--source", "/Users/summthak/Nihal Camera Photos - Hawaii"]
         
         start_time = time.time()
         
