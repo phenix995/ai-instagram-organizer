@@ -95,7 +95,7 @@ def test_migration():
     print("\n🧪 Testing migration...")
     
     try:
-        from test_llama_api import test_llama_api
+        from tests.test_llama_api import test_llama_api
         
         if test_llama_api():
             print("✅ Migration test passed!")
