@@ -38,13 +38,13 @@ Put your photos in the `source_photos` folder, or specify a different folder wit
 #### With Gemini
 
 ```bash
-python instagram_organizer.py --ai-provider gemini --gemini-key YOUR_API_KEY --dev-mode --limit 3
+python ai_instagram_organizer.py --ai-provider gemini --gemini-key YOUR_API_KEY --dev-mode --limit 3
 ```
 
 #### With Ollama
 
 ```bash
-python instagram_organizer.py --ai-provider ollama --dev-mode --limit 3
+python ai_instagram_organizer.py --ai-provider ollama --dev-mode --limit 3
 ```
 
 ### 5. Configure Your Settings
@@ -64,7 +64,7 @@ Edit `config.json`:
 ### 6. Run Full Processing
 
 ```bash
-python instagram_organizer.py --config config.json
+python ai_instagram_organizer.py --config config.json
 ```
 
 ## Advanced Setup (Optional Features)
