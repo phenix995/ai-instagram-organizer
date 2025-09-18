@@ -135,7 +135,7 @@ result = analyze_single_image_gemini_with_limiter(image_path, config, rate_limit
 Run the test suite to verify improvements:
 
 ```bash
-python test_gemini_improvements.py
+python tests/test_gemini_improvements.py
 ```
 
 The test suite includes:

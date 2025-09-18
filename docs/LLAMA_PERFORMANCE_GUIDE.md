@@ -156,10 +156,10 @@ python ai_instagram_organizer.py \
 
 ```bash
 # Test different configurations
-python test_llama_performance.py
+python tests/test_llama_performance.py
 
 # Test rate limiter functionality
-python -c "from test_llama_performance import test_rate_limiter; test_rate_limiter()"
+python -c "from tests.test_llama_performance import test_rate_limiter; test_rate_limiter()"
 ```
 
 ### Monitor Performance

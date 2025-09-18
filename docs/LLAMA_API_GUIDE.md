@@ -15,7 +15,7 @@ This guide covers the Llama API integration for the Instagram Photo Organizer, w
 **Option A: Use the setup script (Recommended)**
 
 ```bash
-python setup_llama.py
+python utils/setup_llama.py
 ```
 
 **Option B: Manual setup**
@@ -31,7 +31,7 @@ export LLAMA_API_KEY="your-api-key-here"
 
 ```bash
 # Run the test script
-python test_llama_api.py
+python tests/test_llama_api.py
 
 # Or run a quick test with the main tool
 python ai_instagram_organizer.py --dev-mode --limit 5

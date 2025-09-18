@@ -202,7 +202,7 @@ Run the test suite to see contextual filtering in action:
 
 ```bash
 # Test contextual similarity calculation
-python test_contextual_filtering.py
+python tests/test_contextual_filtering.py
 
 # Demo with realistic scenarios
 python demo_contextual_filtering.py
