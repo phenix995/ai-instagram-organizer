@@ -57,12 +57,6 @@ def create_instagram_formats(image_path: str, output_dir: str) -> Dict[str, str]
             story_img.save(story_path, "JPEG", quality=95)
             formats['story'] = story_path
             
-            # Reel format (9:16 with padding)
-            reel_img = create_reel_format(img)
-            reel_path = os.path.join(output_dir, f"{base_name}_reel.jpg")
-            reel_img.save(reel_path, "JPEG", quality=95)
-            formats['reel'] = reel_path
-            
     except Exception as e:
         logger.error(f"Could not create formats for {image_path}: {e}")
     
