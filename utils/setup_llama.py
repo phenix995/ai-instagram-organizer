@@ -14,7 +14,7 @@ def setup_llama_config():
     print("=" * 40)
     
     # Check if config.json exists
-    if not os.path.exists("config.json"):
+    if not os.path.exists("../config.json"):
         print("❌ config.json not found!")
         print("Please run this script from the project directory.")
         return False
@@ -28,7 +28,7 @@ def setup_llama_config():
     
     try:
         # Load existing config
-        with open("config.json", "r") as f:
+        with open("../config.json", "r") as f:
             config = json.load(f)
         
         # Update Llama configuration
@@ -39,7 +39,7 @@ def setup_llama_config():
         config["ai_provider"] = "llama"
         
         # Save updated config
-        with open("config.json", "w") as f:
+        with open("../config.json", "w") as f:
             json.dump(config, f, indent=2)
         
         print("✅ Configuration updated successfully!")
@@ -65,7 +65,7 @@ def verify_setup():
     
     try:
         # Try to import and run a basic test
-        from test_llama_api import test_llama_api
+        from tests.test_llama_api import test_llama_api
         
         if test_llama_api():
             print("✅ Setup verification passed!")

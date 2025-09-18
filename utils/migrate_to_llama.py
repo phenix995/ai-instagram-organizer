@@ -14,14 +14,14 @@ def migrate_config():
     print("=" * 40)
     
     # Check if config exists
-    if not os.path.exists("config.json"):
+    if not os.path.exists("../config.json"):
         print("❌ config.json not found!")
         print("Please run this script from the project directory.")
         return False
     
     try:
         # Load existing config
-        with open("config.json", "r") as f:
+        with open("../config.json", "r") as f:
             config = json.load(f)
         
         # Show current provider
@@ -36,7 +36,7 @@ def migrate_config():
             return False
         
         # Create backup
-        backup_file = "config.json.backup"
+        backup_file = "../config.json.backup"
         with open(backup_file, "w") as f:
             json.dump(config, f, indent=2)
         print(f"✅ Backup created: {backup_file}")
@@ -56,7 +56,7 @@ def migrate_config():
         })
         
         # Save updated config
-        with open("config.json", "w") as f:
+        with open("../config.json", "w") as f:
             json.dump(config, f, indent=2)
         
         print("✅ Configuration migrated successfully!")
