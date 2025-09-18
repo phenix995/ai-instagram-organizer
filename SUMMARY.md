@@ -10,8 +10,8 @@
 ### 📁 **Final File Structure**
 
 ```
-instagram_organizer/
-├── instagram_organizer.py    # Single unified script
+ai_instagram_organizer/
+├── ai_instagram_organizer.py    # Single unified script
 ├── config.json              # Single configuration file
 ├── requirements.txt          # Dependencies
 ├── README.md                # Main documentation
@@ -42,8 +42,8 @@ python instagram_api.py --config config_gemini_advanced.json
 
 ```bash
 # One script, clear options
-python instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY
-python instagram_organizer.py --simple-mode  # Core features only
+python ai_instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY
+python ai_instagram_organizer.py --simple-mode  # Core features only
 ```
 
 ### 📊 **Removed Redundancy**
@@ -85,10 +85,10 @@ pip install -r requirements.txt
 # 2. Get Gemini API key from https://aistudio.google.com/app/apikey
 
 # 3. Test with 3 photos
-python instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY --dev-mode --limit 3
+python ai_instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY --dev-mode --limit 3
 
 # 4. Process all photos
-python instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY --source "/path/to/photos"
+python ai_instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY --source "/path/to/photos"
 ```
 
 The codebase is now clean, maintainable, and much easier to use! 🎉
