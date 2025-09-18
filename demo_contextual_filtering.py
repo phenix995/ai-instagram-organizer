@@ -5,7 +5,7 @@ Demo script showing contextual filtering in action with real-world scenarios
 
 import json
 from datetime import datetime
-from instagram_organizer import Config, filter_contextually_similar_images
+from ai_instagram_organizer import Config, filter_contextually_similar_images
 
 def create_hawaii_photo_collection():
     """Create a realistic Hawaii photo collection with contextual similarities"""

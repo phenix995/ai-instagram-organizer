@@ -35,6 +35,10 @@ import threading
 from functools import lru_cache
 from collections import deque
 
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
 # Import tqdm for progress bars
 try:
     from tqdm import tqdm
@@ -42,10 +46,6 @@ try:
 except ImportError:
     TQDM_AVAILABLE = False
     logger.warning("tqdm not available. Install with: pip install tqdm")
-
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
 
 # Check for required dependencies
 try:
