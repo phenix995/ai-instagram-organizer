@@ -101,20 +101,20 @@ From each similar group, the algorithm selects the best photo using configurable
 
 ```bash
 # Enable contextual filtering (default)
-python instagram_organizer.py --source ~/Photos
+python ai_instagram_organizer.py --source ~/Photos
 
 # Disable contextual filtering
-python instagram_organizer.py --source ~/Photos --no-contextual-filter
+python ai_instagram_organizer.py --source ~/Photos --no-contextual-filter
 ```
 
 ### Adjust Threshold
 
 ```bash
 # Conservative filtering (keep more photos)
-python instagram_organizer.py --source ~/Photos --contextual-threshold 0.8
+python ai_instagram_organizer.py --source ~/Photos --contextual-threshold 0.8
 
 # Aggressive filtering (keep fewer photos)
-python instagram_organizer.py --source ~/Photos --contextual-threshold 0.6
+python ai_instagram_organizer.py --source ~/Photos --contextual-threshold 0.6
 ```
 
 ## Use Cases
@@ -125,7 +125,7 @@ python instagram_organizer.py --source ~/Photos --contextual-threshold 0.6
 **Solution**: Keeps 1-2 best sunsets, preserves variety
 
 ```bash
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --source "~/Photos/Vacation" \
   --contextual-threshold 0.7 \
   --ai-provider gemini
@@ -137,7 +137,7 @@ python instagram_organizer.py \
 **Solution**: Keeps best from each scene type
 
 ```bash
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --source "~/Photos/Wedding" \
   --contextual-threshold 0.8 \
   --ai-provider gemini
@@ -149,7 +149,7 @@ python instagram_organizer.py \
 **Solution**: Curates best examples of each activity
 
 ```bash
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --source "~/Photos/Daily" \
   --contextual-threshold 0.7 \
   --ai-provider gemini
@@ -161,7 +161,7 @@ python instagram_organizer.py \
 **Solution**: Keeps only the absolute best
 
 ```bash
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --source "~/Photos/Portfolio" \
   --contextual-threshold 0.8 \
   --ai-provider gemini

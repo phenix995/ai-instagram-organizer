@@ -110,7 +110,7 @@ The Gemini API batch processing has been significantly improved to handle the st
 ### Basic Usage
 
 ```python
-from instagram_organizer import analyze_images_gemini_optimized, Config
+from ai_instagram_organizer import analyze_images_gemini_optimized, Config
 
 config = Config()
 config.ai_provider = 'gemini'
@@ -122,7 +122,7 @@ results = analyze_images_gemini_optimized(image_paths, config)
 ### Rate Limiter Usage
 
 ```python
-from instagram_organizer import GeminiRateLimiter, analyze_single_image_gemini_with_limiter
+from ai_instagram_organizer import GeminiRateLimiter, analyze_single_image_gemini_with_limiter
 
 rate_limiter = GeminiRateLimiter(config)
 

@@ -64,7 +64,7 @@ The Instagram organizer now includes several performance optimizations for proce
 
 ```bash
 # Maximum performance for large collections
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --parallel-workers 15 \
   --batch-size 8 \
   --fast-mode \
@@ -73,14 +73,14 @@ python instagram_organizer.py \
   --source "/path/to/5000/photos"
 
 # Conservative settings for slower systems
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --parallel-workers 5 \
   --batch-size 4 \
   --ai-provider gemini \
   --gemini-key YOUR_KEY
 
 # Disable caching for testing
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --no-cache \
   --dev-mode --limit 10
 ```

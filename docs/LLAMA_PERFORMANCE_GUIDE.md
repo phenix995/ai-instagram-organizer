@@ -86,14 +86,14 @@ max_concurrent: 50
 
 ```bash
 # Uses optimized defaults
-python instagram_organizer.py --source "/path/to/photos"
+python ai_instagram_organizer.py --source "/path/to/photos"
 ```
 
 ### High-Speed Processing
 
 ```bash
 # Maximum throughput for large collections
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --source "/path/to/photos" \
   --parallel-workers 50 \
   --batch-size 8 \
@@ -104,7 +104,7 @@ python instagram_organizer.py \
 
 ```bash
 # Safer settings for unstable connections
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --source "/path/to/photos" \
   --parallel-workers 10 \
   --batch-size 3 \
@@ -167,14 +167,14 @@ python -c "from test_llama_performance import test_rate_limiter; test_rate_limit
 ```bash
 # Enable detailed logging
 export LLAMA_DEBUG=1
-python instagram_organizer.py --source "/path/to/photos"
+python ai_instagram_organizer.py --source "/path/to/photos"
 ```
 
 ### Benchmark Your Setup
 
 ```bash
 # Test with your specific images
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --dev-mode --limit 20 \
   --source "/path/to/test/photos" \
   --ai-provider llama
@@ -261,7 +261,7 @@ Solution: Increase parallel_workers and reduce delays
 
 ```bash
 # Enable detailed performance logging
-python instagram_organizer.py --source "/path" --debug-performance
+python ai_instagram_organizer.py --source "/path" --debug-performance
 ```
 
 ## 💡 Best Practices

@@ -121,7 +121,7 @@ python cleanup_temp_folders.py --base-name "temp_converted_images"
 ### Normal usage (auto-cleanup)
 
 ```bash
-python instagram_organizer.py --source "/path/to/hawaii_photos" --gemini-key YOUR_KEY
+python ai_instagram_organizer.py --source "/path/to/hawaii_photos" --gemini-key YOUR_KEY
 # Temp files automatically cleaned up after processing
 ```
 
@@ -129,7 +129,7 @@ python instagram_organizer.py --source "/path/to/hawaii_photos" --gemini-key YOU
 
 ```bash
 # Set keep_temp_files: true in config.json, then:
-python instagram_organizer.py --source "/path/to/photos" --gemini-key YOUR_KEY
+python ai_instagram_organizer.py --source "/path/to/photos" --gemini-key YOUR_KEY
 # Temp files kept for inspection
 ```
 
@@ -137,10 +137,10 @@ python instagram_organizer.py --source "/path/to/photos" --gemini-key YOUR_KEY
 
 ```bash
 # First collection
-python instagram_organizer.py --source "/path/to/vacation_photos" --gemini-key YOUR_KEY
+python ai_instagram_organizer.py --source "/path/to/vacation_photos" --gemini-key YOUR_KEY
 
 # Second collection (completely isolated)
-python instagram_organizer.py --source "/path/to/wedding_photos" --gemini-key YOUR_KEY
+python ai_instagram_organizer.py --source "/path/to/wedding_photos" --gemini-key YOUR_KEY
 
 # No interference between collections!
 ```
@@ -162,7 +162,7 @@ To verify the fix is working:
 1. **Run with first source folder:**
 
    ```bash
-   python instagram_organizer.py --source "/path/to/photos1" --gemini-key YOUR_KEY
+   python ai_instagram_organizer.py --source "/path/to/photos1" --gemini-key YOUR_KEY
    ```
 
 2. **Check temp directory created:**
@@ -174,7 +174,7 @@ To verify the fix is working:
 3. **Run with different source folder:**
 
    ```bash
-   python instagram_organizer.py --source "/path/to/photos2" --gemini-key YOUR_KEY
+   python ai_instagram_organizer.py --source "/path/to/photos2" --gemini-key YOUR_KEY
    ```
 
 4. **Verify isolation:**

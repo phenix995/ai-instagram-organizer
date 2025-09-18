@@ -109,7 +109,7 @@ The system now provides enhanced logging:
 The improvements are automatic and require no code changes. Simply run:
 
 ```bash
-python instagram_organizer.py
+python ai_instagram_organizer.py
 ```
 
 The system will automatically:

@@ -125,7 +125,7 @@ Based on the API response, Gemini free tier has:
 ### For Fresh API Key (with quota available)
 
 ```python
-from instagram_organizer import analyze_images_gemini_optimized, Config
+from ai_instagram_organizer import analyze_images_gemini_optimized, Config
 
 config = Config()
 config.ai_provider = 'gemini'

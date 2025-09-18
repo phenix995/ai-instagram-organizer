@@ -137,21 +137,21 @@ python install_advanced_features.py
 
 ```bash
 # Run with all advanced features
-python instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY --source "/path/to/photos"
+python ai_instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY --source "/path/to/photos"
 ```
 
 ### Development Mode with Advanced Features
 
 ```bash
 # Test advanced features on limited photos
-python instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY --dev-mode --limit 50
+python ai_instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY --dev-mode --limit 50
 ```
 
 ### High-Quality Only Mode
 
 ```bash
 # Only process premium and excellent photos
-python instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY --min-score 7.5
+python ai_instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY --min-score 7.5
 ```
 
 ## 📈 Expected Performance Improvements

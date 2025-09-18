@@ -270,7 +270,7 @@ The enhanced algorithm generates detailed analytics:
 
 ```bash
 # Emphasize diversity and storytelling with contextual filtering
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --source "~/Photos/Europe_Trip" \
   --ai-provider gemini \
   --gemini-key YOUR_KEY \
@@ -282,7 +282,7 @@ python instagram_organizer.py \
 
 ```bash
 # High-quality threshold, fewer posts, strict contextual filtering
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --source "~/Photos/Portfolio" \
   --ai-provider gemini \
   --gemini-key YOUR_KEY \
@@ -294,7 +294,7 @@ python instagram_organizer.py \
 
 ```bash
 # Balanced approach with all strategies
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --source "~/Photos/Daily_Life" \
   --ai-provider gemini \
   --gemini-key YOUR_KEY \
@@ -305,7 +305,7 @@ python instagram_organizer.py \
 
 ```bash
 # If you want to keep all photos regardless of context similarity
-python instagram_organizer.py \
+python ai_instagram_organizer.py \
   --source "~/Photos" \
   --ai-provider gemini \
   --gemini-key YOUR_KEY \
@@ -318,7 +318,7 @@ python instagram_organizer.py \
 
 ```bash
 # Test with small batch first
-python instagram_organizer.py --dev-mode --limit 20
+python ai_instagram_organizer.py --dev-mode --limit 20
 ```
 
 ### 2. Adjust Quality Thresholds

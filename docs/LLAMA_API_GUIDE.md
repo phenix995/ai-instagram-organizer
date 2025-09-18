@@ -34,7 +34,7 @@ export LLAMA_API_KEY="your-api-key-here"
 python test_llama_api.py
 
 # Or run a quick test with the main tool
-python instagram_organizer.py --dev-mode --limit 5
+python ai_instagram_organizer.py --dev-mode --limit 5
 ```
 
 ## 🔧 Configuration
@@ -67,23 +67,23 @@ The tool looks for the API key in this order:
 
 ```bash
 # Use default Llama provider
-python instagram_organizer.py --source "/path/to/photos"
+python ai_instagram_organizer.py --source "/path/to/photos"
 
 # Specify Llama explicitly
-python instagram_organizer.py --ai-provider llama --source "/path/to/photos"
+python ai_instagram_organizer.py --ai-provider llama --source "/path/to/photos"
 
 # With API key override
-python instagram_organizer.py --llama-key "your-key" --source "/path/to/photos"
+python ai_instagram_organizer.py --llama-key "your-key" --source "/path/to/photos"
 ```
 
 ### Development Mode
 
 ```bash
 # Test with 5 photos
-python instagram_organizer.py --dev-mode --limit 5
+python ai_instagram_organizer.py --dev-mode --limit 5
 
 # Test with specific folder
-python instagram_organizer.py --dev-mode --limit 10 --source "/path/to/test/photos"
+python ai_instagram_organizer.py --dev-mode --limit 10 --source "/path/to/test/photos"
 ```
 
 ## 🔍 Features
@@ -156,13 +156,13 @@ You can easily switch between AI providers:
 
 ```bash
 # Use Llama (default)
-python instagram_organizer.py --ai-provider llama
+python ai_instagram_organizer.py --ai-provider llama
 
 # Use Gemini
-python instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY
+python ai_instagram_organizer.py --ai-provider gemini --gemini-key YOUR_KEY
 
 # Use Ollama (local)
-python instagram_organizer.py --ai-provider ollama
+python ai_instagram_organizer.py --ai-provider ollama
 ```
 
 ## 📊 Performance Comparison
