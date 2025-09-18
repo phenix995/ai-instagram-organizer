@@ -51,7 +51,7 @@ def run_with_individual_analysis(source_folder, gemini_key, additional_args=None
     
     # Build command
     cmd = [
-        "python", "instagram_organizer.py",
+        "python", "ai_instagram_organizer.py",
         "--config", temp_config_path,
         "--gemini-key", gemini_key
     ]
