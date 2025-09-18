@@ -4,6 +4,25 @@ source_photos/
 temp_converted_images_*/
 instagram_posts_*/
 
+# API Keys and Secrets - CRITICAL SECURITY
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+secrets.json
+api_keys.json
+credentials.json
+auth.json
+
+# API Key patterns (case insensitive)
+*API_KEY*
+*APIKEY*
+*SECRET*
+*TOKEN*
+*PASSWORD*
+*CREDENTIAL*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
