@@ -95,7 +95,7 @@ if __name__ == "__main__":
         
         print("\n🎉 Setup complete!")
         print("You can now run the Instagram organizer with Llama API:")
-        print("python instagram_organizer.py --source your_photos_folder")
+        print("python ai_instagram_organizer.py --source your_photos_folder")
     else:
         print("\n❌ Setup failed!")
         sys.exit(1)
