@@ -1,3 +1,9 @@
+# Local Data and Output - VERY IMPORTANT
+config.json
+source_photos/
+temp_converted_images_*/
+instagram_posts_*/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

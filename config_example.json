@@ -1,0 +1,182 @@
+{
+  "source_folder": "source_photos",
+  "output_folder_prefix": "instagram_posts",
+  "temp_convert_folder": "temp_converted_images",
+  "ai_provider": "llama",
+  "processing": {
+    "post_size": 10,
+    "process_all": false,
+    "dev_mode_limit": 100,
+    "similarity_threshold": 2,
+    "image_quality": 100,
+    "keep_temp_files": false,
+    "similarity_optimization": {
+      "parallel_workers": 10,
+      "thumbnail_size": 256,
+      "hash_size": 8,
+      "batch_size": 50,
+      "enable_prefilter": true
+    }
+  },
+  "performance": {
+    "ai_analysis": {
+      "parallel_workers": 20,
+      "batch_size": 8,
+      "max_retries": 3,
+      "timeout": 30,
+      "enable_caching": true,
+      "cache_duration_hours": 24,
+      "rate_limit_delay": 0.1,
+      "batch_delay": 0.5
+    },
+    "image_processing": {
+      "thumbnail_size": 512,
+      "jpeg_quality": 100,
+      "enable_fast_mode": true,
+      "min_resolution": [
+        800,
+        600
+      ],
+      "min_file_size_kb": 100
+    }
+  },
+  "enhanced_algorithm": {
+    "quality_thresholds": {
+      "premium_min_score": 8.5,
+      "excellent_min_score": 7.5,
+      "good_min_score": 6.0,
+      "minimum_posting_score": 7.0
+    },
+    "post_strategies": {
+      "max_premium_posts": 3,
+      "max_diverse_posts": 5,
+      "enable_theme_posts": true,
+      "enable_chronological_fallback": true
+    },
+    "diversity_weights": {
+      "category_diversity": 0.3,
+      "mood_diversity": 0.2,
+      "time_diversity": 0.2,
+      "setting_diversity": 0.15,
+      "quality_consistency": 0.15
+    },
+    "scoring_weights": {
+      "technical_quality": 0.2,
+      "visual_appeal": 0.25,
+      "engagement_potential": 0.35,
+      "uniqueness": 0.15,
+      "story_value": 0.05
+    },
+    "computer_vision": {
+      "enable_cv_analysis": true,
+      "cv_weight": 0.6,
+      "ai_weight": 0.4,
+      "face_detection": true,
+      "composition_analysis": true,
+      "technical_quality_override": true
+    },
+    "engagement_prediction": {
+      "enable_prediction": true,
+      "prediction_weight": 0.6,
+      "ai_weight": 0.4,
+      "consider_posting_time": true,
+      "trend_analysis": true,
+      "viral_potential_boost": 1.2
+    }
+  },
+  "ollama": {
+    "api_url": "http://localhost:11434/api/generate",
+    "model": "gemma3:4b",
+    "timeout": 120
+  },
+  "multi_provider": {
+    "strategy": "load_balance",
+    "providers": [
+      "llama",
+      "gemini"
+    ],
+    "fallback_order": [
+      "gemini",
+      "llama"
+    ],
+    "health_check_interval": 30,
+    "auto_failover": true
+  },
+  "llama": {
+    "api_key": "YOUR_LLAMA_API_KEY",
+    "model": "Llama-4-Maverick-17B-128E-Instruct-FP8",
+    "api_url": "https://api.llama.com/v1/chat/completions",
+    "timeout": 30,
+    "performance": {
+      "max_requests_per_minute": 2000,
+      "max_concurrent_requests": 15,
+      "adaptive_rate_limiting": false,
+      "burst_mode": true,
+      "optimal_batch_size": 8,
+      "fast_timeout": 20,
+      "circuit_breaker": {
+        "failure_threshold": 3,
+        "recovery_timeout": 15,
+        "half_open_max_calls": 2
+      },
+      "backoff_strategy": {
+        "initial_delay": 0.2,
+        "max_delay": 5.0,
+        "multiplier": 1.5,
+        "jitter": true
+      }
+    }
+  },
+  "gemini": {
+    "api_key": "YOUR_GOOGLE_API_KEY",
+    "model": "gemini-2.0-flash-lite",
+    "api_url": "https://generativelanguage.googleapis.com/v1beta/models",
+    "timeout": 60,
+    "performance": {
+      "max_requests_per_minute": 1500,
+      "max_concurrent_requests": 3,
+      "adaptive_rate_limiting": true,
+      "burst_mode": false,
+      "optimal_batch_size": 2,
+      "fast_timeout": 60,
+      "circuit_breaker": {
+        "failure_threshold": 3,
+        "recovery_timeout": 60,
+        "half_open_max_calls": 2
+      },
+      "backoff_strategy": {
+        "initial_delay": 2.0,
+        "max_delay": 120.0,
+        "multiplier": 2.5,
+        "jitter": true
+      }
+    }
+  },
+  "contextual_filtering": {
+    "enable_contextual_filtering": true,
+    "contextual_similarity_threshold": 0.75,
+    "contextual_selection_strategy": "highest_score",
+    "max_photos_per_context": 2,
+    "context_weights": {
+      "category_weight": 0.25,
+      "subcategory_weight": 0.15,
+      "location_weight": 0.3,
+      "mood_weight": 0.2,
+      "people_weight": 0.1
+    },
+    "semantic_analysis": {
+      "enable_semantic_context": true,
+      "similarity_threshold": 0.7,
+      "entity_extraction": true,
+      "context_grouping": true,
+      "diversity_enforcement": true
+    }
+  },
+  "features": {
+    "enable_enhancement": true,
+    "enable_analytics": true,
+    "enable_scheduling": true,
+    "enable_multi_platform": true,
+    "enable_hashtag_optimization": true
+  }
+}
