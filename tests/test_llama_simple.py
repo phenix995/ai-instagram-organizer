@@ -11,7 +11,11 @@ def test_llama_simple():
     """Test Llama API with text-only request"""
     
     # Check for API key
-    api_key = os.environ.get('LLAMA_API_KEY') or "***REMOVED_LLAMA_API_KEY***"
+    api_key = os.environ.get('LLAMA_API_KEY')
+    
+    if not api_key:
+        print("❌ Error: API key is not set.")
+        return False
     
     print(f"🔑 Using API key: {api_key[:20]}...")
     

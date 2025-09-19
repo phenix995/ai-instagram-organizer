@@ -3,6 +3,7 @@
 Test script to see what Gemini is actually returning
 """
 
+import os
 import requests
 import json
 import base64
@@ -25,7 +26,7 @@ def test_gemini_simple():
     """Test Gemini with a simple prompt"""
     
     # Use a simple test image path - adjust this to an actual image
-    image_path = "/Users/summthak/Nihal Camera Photos - Hawaii/DSC00087.JPG"
+    image_path = "test_image_complex.jpg"
     
     try:
         base64_image = encode_image_to_base64(image_path)
@@ -51,7 +52,12 @@ Rate technical_score, visual_appeal, engagement_score, uniqueness, and story_pot
 Choose category from: landscape, portrait, food, architecture, lifestyle, travel, nature, street, action.
 Return ONLY valid JSON, no markdown formatting."""
     
-    api_key = "***REMOVED_GEMINI_API_KEY***"
+    api_key = os.environ.get('GEMINI_API_KEY')
+    
+    if not api_key:
+        print("❌ Error: API key is not set.")
+        return False
+    
     model = "gemini-1.5-flash"
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
     

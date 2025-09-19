@@ -11,8 +11,12 @@ from pathlib import Path
 
 def test_llama_api():
     """Test Llama API"""
-    api_key = "***REMOVED_LLAMA_API_KEY***"
+    api_key = os.environ.get('LLAMA_API_KEY')
     
+    if not api_key:
+        print("❌ Error: API key is not set.")
+        return False
+
     test_image = "test_image_complex.jpg"
     if not os.path.exists(test_image):
         print("❌ Test image not found")
@@ -69,7 +73,11 @@ def test_llama_api():
 
 def test_gemini_api():
     """Test Gemini API"""
-    api_key = "***REMOVED_GEMINI_API_KEY***"
+    api_key = os.environ.get('GEMINI_API_KEY')
+    
+    if not api_key:
+        print("❌ Error: API key is not set.")
+        return False
     
     test_image = "test_image_complex.jpg"
     if not os.path.exists(test_image):

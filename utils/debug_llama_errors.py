@@ -17,7 +17,11 @@ def image_to_base64(image_path):
 def test_single_image_analysis():
     """Test the exact payload used in the organizer for image analysis"""
     
-    api_key = "***REMOVED_LLAMA_API_KEY***"
+    api_key = os.environ.get('LLAMA_API_KEY')
+    
+    if not api_key:
+        print("❌ Error: API key is not set.")
+        return False
     
     # Use the test image
     test_image = "test_image_complex.jpg"
@@ -107,9 +111,13 @@ Return ONLY valid JSON, no markdown formatting."""
 
 def test_content_generation():
     """Test content generation with multiple images"""
-    
-    api_key = "***REMOVED_LLAMA_API_KEY***"
-    
+
+    api_key = os.environ.get('LLAMA_API_KEY')
+
+    if not api_key:
+        print("❌ Error: API key is not set.")
+        return False
+
     # Use the test image multiple times to simulate batch
     test_image = "test_image_complex.jpg"
     if not os.path.exists(test_image):

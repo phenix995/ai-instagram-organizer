@@ -3,6 +3,7 @@
 Performance test for the optimized Instagram organizer
 """
 
+import os
 import time
 import subprocess
 import sys
@@ -13,22 +14,28 @@ def test_performance():
     print("🚀 Testing Performance Optimizations")
     print("=" * 50)
     
+    api_key = os.environ.get('GEMINI_API_KEY')
+    
+    if not api_key:
+        print("❌ Error: API key is not set.")
+        return False
+
     # Test configurations
     test_configs = [
         {
             "name": "Standard Mode",
-            "args": ["--dev-mode", "--limit", "3", "--ai-provider", "gemini", "--gemini-key", "***REMOVED_GEMINI_API_KEY***"]
+            "args": ["--dev-mode", "--limit", "3", "--ai-provider", "gemini", "--gemini-key", api_key]
         },
         {
             "name": "Fast Mode + Parallel",
-            "args": ["--dev-mode", "--limit", "3", "--ai-provider", "gemini", "--gemini-key", "***REMOVED_GEMINI_API_KEY***", "--fast-mode", "--parallel-workers", "5"]
+            "args": ["--dev-mode", "--limit", "3", "--ai-provider", "gemini", "--gemini-key", api_key, "--fast-mode", "--parallel-workers", "5"]
         },
         {
             "name": "Batch Mode",
-            "args": ["--dev-mode", "--limit", "6", "--ai-provider", "gemini", "--gemini-key", "***REMOVED_GEMINI_API_KEY***", "--fast-mode", "--parallel-workers", "3", "--batch-size", "3"]
+            "args": ["--dev-mode", "--limit", "6", "--ai-provider", "gemini", "--gemini-key", api_key, "--fast-mode", "--parallel-workers", "3", "--batch-size", "3"]
         }
     ]
-    
+
     results = []
     
     for config in test_configs:
@@ -36,7 +43,7 @@ def test_performance():
         print("-" * 30)
         
         # Add source folder
-        cmd = ["python", "ai_instagram_organizer.py"] + config["args"] + ["--source", "/Users/summthak/Nihal Camera Photos - Hawaii"]
+        cmd = ["python", "ai_instagram_organizer.py"] + config["args"] + ["--source", "."]
         
         start_time = time.time()
         

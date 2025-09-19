@@ -3,6 +3,7 @@
 Simple test to check Gemini API status and limits
 """
 
+import os
 import requests
 import json
 import time
@@ -22,9 +23,13 @@ def test_gemini_api_simple():
     """Test Gemini API with minimal request"""
     print("🔧 Testing Gemini API Status")
     print("=" * 40)
-    
-    api_key = "***REMOVED_GEMINI_API_KEY***"
-    
+
+    api_key = os.environ.get('GEMINI_API_KEY')
+
+    if not api_key:
+        print("❌ Error: API key is not set.")
+        return False
+
     # Create test image
     test_image = create_simple_test_image()
     
@@ -105,7 +110,11 @@ def test_multiple_requests():
     print("\n🔧 Testing Multiple Requests")
     print("=" * 40)
     
-    api_key = "***REMOVED_GEMINI_API_KEY***"
+    api_key = os.environ.get('GEMINI_API_KEY')
+
+    if not api_key:
+        print("❌ Error: API key is not set.")
+        return False
     
     url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent"
     
