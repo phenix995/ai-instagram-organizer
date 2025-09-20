@@ -13,6 +13,13 @@ from io import BytesIO
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+# Ensure the project root is on sys.path so the CLI module can be imported when
+# the server is launched from the webui directory (e.g. inside the Docker
+# container)
+ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
@@ -27,7 +34,6 @@ from ai_instagram_organizer import (
     get_default_cli_values,
 )
 
-ROOT_DIR = Path(__file__).resolve().parents[1]
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 app = FastAPI(
