@@ -267,6 +267,26 @@ python utils/migrate_to_llama.py
 python tests/test_llama_api.py
 ```
 
+## 🖥️ Interactive Web Interface
+
+Prefer a dashboard over the terminal? Launch the built-in web application to configure every command-line flag visually,
+preview your source imagery, and start/stop processing with a single click.
+
+```bash
+pip install -r requirements.txt
+python webui/server.py  # the server runs on http://localhost:8000 by default
+```
+
+**Highlights**
+
+- Idle-by-default landing screen with live status indicator
+- Form controls for **every** CLI argument (including toggles, selects, and numeric inputs)
+- Start/Stop controls that execute the organizer using your selections
+- Real-time log viewer that mirrors console output and supports clearing history
+- Rich image gallery preview for the configured source directory (updates automatically when the path changes)
+
+Once the server is running, open your browser to `http://localhost:8000` to begin.
+
 ## 🎯 Use Cases
 
 ### First Time Testing

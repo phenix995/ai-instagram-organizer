@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Instagram Organizer Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="min-h-screen px-6 py-10">
+      <div class="max-w-6xl mx-auto space-y-8">
+        <header class="glass-panel rounded-3xl p-8 border border-slate-700/40">
+          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div id="status-indicator" class="status-dot idle"></div>
+                <span id="status-label" class="uppercase tracking-[0.4em] text-xs text-slate-400">
+                  idle
+                </span>
+              </div>
+              <div>
+                <h1 class="text-3xl md:text-4xl font-semibold text-white flex items-center gap-3">
+                  <span>AI Instagram Organizer</span>
+                  <span class="badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                      <path d="M12 2a10 10 0 100 20 10 10 0 000-20zM7.75 9.75a1.25 1.25 0 112.5 0 1.25 1.25 0 01-2.5 0zm8.5 0a1.25 1.25 0 11-2.5 0 1.25 1.25 0 012.5 0zM12 17.5c-2.21 0-4.21-1.01-5.5-2.59l1.5-1.3a4.87 4.87 0 008 0l1.5 1.3A6.87 6.87 0 0112 17.5z" />
+                    </svg>
+                    creative automation
+                  </span>
+                </h1>
+                <p class="text-slate-300 mt-3 max-w-3xl">
+                  Configure every CLI option visually, launch the processing pipeline, monitor live logs,
+                  and preview your source imagery without leaving the browser.
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button id="start-btn" class="primary rounded-full px-6 py-3 font-medium shadow-lg shadow-indigo-500/30 transition">
+                Start organizer
+              </button>
+              <button id="stop-btn" class="secondary rounded-full px-6 py-3 font-medium border border-slate-600/60 transition">
+                Stop
+              </button>
+            </div>
+          </div>
+          <div class="mt-6 pt-6 border-t border-slate-700/40 text-sm text-slate-300" id="command-display">
+            Waiting for launch configuration…
+          </div>
+        </header>
+
+        <main class="space-y-8">
+          <section class="glass-panel rounded-3xl p-8 border border-slate-700/40">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <h2 class="text-xl font-semibold text-white">Workflow settings</h2>
+                <p class="text-slate-300 text-sm mt-1">
+                  Every command-line flag is available below. Tune the organizer to your needs before starting.
+                </p>
+              </div>
+              <div class="text-xs text-slate-400 uppercase tracking-[0.3em]">live configuration</div>
+            </div>
+            <form id="settings-form" class="mt-6 grid gap-5 md:grid-cols-2"></form>
+          </section>
+
+          <section class="glass-panel rounded-3xl p-8 border border-slate-700/40">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+              <div>
+                <h2 class="text-xl font-semibold text-white">Execution log</h2>
+                <p class="text-slate-300 text-sm">Live output from the CLI process, refreshed automatically.</p>
+              </div>
+              <button id="clear-log" class="secondary rounded-full px-4 py-2 text-sm border border-slate-600/60">
+                Clear log
+              </button>
+            </div>
+            <div id="log-output"></div>
+          </section>
+
+          <section class="glass-panel rounded-3xl p-8 border border-slate-700/40">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+              <div>
+                <h2 class="text-xl font-semibold text-white">Image viewer</h2>
+                <p class="text-slate-300 text-sm">
+                  Preview up to twelve images from the selected source directory. Update the source path to refresh.
+                </p>
+              </div>
+              <div id="image-folder" class="badge">source: —</div>
+            </div>
+            <div id="image-error" class="text-sm text-rose-300 hidden"></div>
+            <div id="image-grid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="/static/app.js"></script>
+  </body>
+</html>
