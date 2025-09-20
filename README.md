@@ -52,6 +52,32 @@ An AI-powered tool that automatically organizes your photos into Instagram-ready
 
 ## 🚀 Quick Start
 
+### 🐳 Run with Docker
+
+1. **Build and start the container** (uses Docker Compose):
+
+   ```bash
+   docker compose up --build
+   ```
+
+   By default this runs the organizer in development mode against photos mounted from `./photos` on your host. Override the host folder by setting the `HOST_PHOTO_DIR` variable before running Compose. On Windows you can supply a Windows-style path, for example `HOST_PHOTO_DIR=C:/Users/you/Pictures`.
+
+2. **Provide API keys** by exporting them (or storing them in a `.env` file that Compose will read automatically):
+
+   ```bash
+   export LLAMA_API_KEY="your-api-key-here"
+   export GEMINI_API_KEY="your-gemini-key"
+   docker compose up
+   ```
+
+3. **Override runtime options** by appending flags to the Compose command. For example, to process a full photo library in simple mode:
+
+   ```bash
+   docker compose run organizer --source /data/photos --simple-mode
+   ```
+
+   All command-line arguments supported by `ai_instagram_organizer.py` can be passed this way.
+
 ### Prerequisites
 
 1. **Install Python dependencies**:
