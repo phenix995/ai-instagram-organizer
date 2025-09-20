@@ -10,3 +10,17 @@ services:
       - ${HOST_PHOTO_DIR:-./photos}:/data/photos
       - ${HOST_CONFIG_FILE:-./config_example.json}:/app/config.json:ro
     command: ["--source", "/data/photos", "--dev-mode", "--limit", "5"]
+
+  webui:
+    build:
+      context: .
+    image: ai-instagram-organizer:latest
+    environment:
+      LLAMA_API_KEY: ${LLAMA_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    volumes:
+      - ${HOST_PHOTO_DIR:-./photos}:/data/photos
+      - ${HOST_CONFIG_FILE:-./config_example.json}:/app/config.json:ro
+    ports:
+      - "8000:8000"
+    entrypoint: ["python", "webui/server.py"]

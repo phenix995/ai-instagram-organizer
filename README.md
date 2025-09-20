@@ -78,6 +78,23 @@ An AI-powered tool that automatically organizes your photos into Instagram-ready
 
    All command-line arguments supported by `ai_instagram_organizer.py` can be passed this way.
 
+### 🖥️ Run the Web Dashboard with Docker
+
+The Compose file also includes a `webui` service that launches the FastAPI dashboard. It reuses the same environment variables
+and volume mounts as the CLI container, so your API keys and mounted photo/config directories are available to the UI.
+
+1. **Start the dashboard**:
+
+   ```bash
+   docker compose up webui
+   ```
+
+2. **Open the app** at [http://localhost:8000](http://localhost:8000). The container publishes port `8000` so the FastAPI UI is
+   reachable from your browser.
+
+3. **Customize paths if needed** by exporting `HOST_PHOTO_DIR` and `HOST_CONFIG_FILE` before running Compose. The same values
+   used for the CLI are shared with the dashboard.
+
 ### Prerequisites
 
 1. **Install Python dependencies**:
