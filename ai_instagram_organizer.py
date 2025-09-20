@@ -22,7 +22,7 @@ import random
 import logging
 import argparse
 from pathlib import Path
-from typing import List, Dict, Optional, Tuple
+from typing import Any, List, Dict, Optional, Tuple
 from PIL import Image
 from PIL.ExifTags import TAGS
 from io import BytesIO
@@ -756,42 +756,107 @@ def quick_quality_filter(image_path: str, config) -> bool:
     except Exception:
         return False
 
-def setup_cli_args():
-    """Setup command line arguments"""
+def build_arg_parser() -> argparse.ArgumentParser:
+    """Create an argument parser for the CLI interface."""
     parser = argparse.ArgumentParser(description="Instagram Photo Organizer with AI Analysis")
-    
+
     # Basic options
     parser.add_argument("--source", "-s", help="Source folder path")
     parser.add_argument("--output", "-o", help="Output folder path")
     parser.add_argument("--config", "-c", default="config.json", help="Config file path")
-    
+
     # Processing options
     parser.add_argument("--dev-mode", "-d", action="store_true", help="Enable development mode")
     parser.add_argument("--limit", "-l", type=int, help="Limit photos in dev mode")
     parser.add_argument("--post-size", "-p", type=int, help="Photos per post")
     parser.add_argument("--similarity", type=int, help="Similarity threshold (0-10)")
-    
+
     # AI Provider options
     parser.add_argument("--ai-provider", choices=['llama', 'ollama', 'gemini'], help="AI provider to use")
     parser.add_argument("--llama-key", help="Llama API key")
     parser.add_argument("--gemini-key", help="Gemini API key")
     parser.add_argument("--ollama-url", help="Ollama API URL")
     parser.add_argument("--ollama-model", help="Ollama model name")
-    
+
     # Mode selection
     parser.add_argument("--simple-mode", action="store_true", help="Run in simple mode (core features only)")
-    
+
     # Performance options
     parser.add_argument("--parallel-workers", type=int, help="Number of parallel AI analysis workers")
     parser.add_argument("--batch-size", type=int, help="Batch size for AI analysis")
     parser.add_argument("--fast-mode", action="store_true", help="Enable fast processing mode")
     parser.add_argument("--no-cache", action="store_true", help="Disable AI analysis caching")
-    
+
     # Contextual filtering options
     parser.add_argument("--no-contextual-filter", action="store_true", help="Disable AI-based contextual similarity filtering")
     parser.add_argument("--contextual-threshold", type=float, help="Contextual similarity threshold (0.0-1.0)")
-    
+
+    return parser
+
+
+def setup_cli_args():
+    """Setup command line arguments"""
+    parser = build_arg_parser()
     return parser.parse_args()
+
+
+def get_cli_arguments_metadata() -> List[Dict[str, Any]]:
+    """Return metadata about CLI arguments for UI generation."""
+    parser = build_arg_parser()
+    metadata: List[Dict[str, Any]] = []
+
+    for action in parser._actions:
+        if action.dest == "help":
+            continue
+
+        argument_type = "string"
+        if isinstance(action, argparse._StoreTrueAction):
+            argument_type = "boolean"
+        elif action.type is int:
+            argument_type = "integer"
+        elif action.type is float:
+            argument_type = "float"
+
+        metadata.append({
+            "dest": action.dest,
+            "flags": action.option_strings,
+            "help": action.help or "",
+            "type": argument_type,
+            "choices": action.choices if hasattr(action, "choices") else None,
+            "default": action.default if action.default is not argparse.SUPPRESS else None,
+        })
+
+    return metadata
+
+
+def get_default_cli_values(config_path: str = "config.json") -> Dict[str, Any]:
+    """Return default CLI values derived from the configuration file."""
+    config = Config(config_path)
+
+    defaults: Dict[str, Any] = {
+        "source": config.source_folder,
+        "output": "",
+        "config": config_path,
+        "dev_mode": not config.process_all,
+        "limit": config.dev_mode_limit,
+        "post_size": config.post_size,
+        "similarity": config.similarity_threshold,
+        "ai_provider": config.ai_provider,
+        "llama_key": config.llama.get("api_key") if hasattr(config, "llama") else "",
+        "gemini_key": config.gemini.get("api_key") if hasattr(config, "gemini") else "",
+        "ollama_url": config.ollama.get("api_url") if hasattr(config, "ollama") else "",
+        "ollama_model": config.ollama.get("model") if hasattr(config, "ollama") else "",
+        "simple_mode": False,
+        "parallel_workers": config.ai_parallel_workers,
+        "batch_size": config.ai_batch_size,
+        "fast_mode": config.enable_fast_mode,
+        "no_cache": not config.enable_caching,
+        "no_contextual_filter": not config.enable_contextual_filtering,
+        "contextual_threshold": config.contextual_similarity_threshold,
+    }
+
+    return defaults
+
 
 def get_exif_datetime(image_path: str) -> datetime.datetime:
     """Extract creation datetime from image EXIF data"""
