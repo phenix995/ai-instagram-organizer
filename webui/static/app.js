@@ -131,13 +131,188 @@ const createField = (arg) => {
   return { wrapper, inputElement };
 };
 
+const LLM_ARGUMENT_KEYS = new Set([
+  'ai_provider',
+  'llama_key',
+  'gemini_key',
+  'ollama_url',
+  'ollama_model',
+]);
+
+const createLlmInput = (arg, { label, placeholder, type = 'text' }) => {
+  const container = document.createElement('div');
+  container.className = 'space-y-2';
+
+  const fieldLabel = document.createElement('label');
+  fieldLabel.className = 'text-xs uppercase tracking-[0.3em] text-slate-400';
+  fieldLabel.htmlFor = `arg-${arg.dest}`;
+  fieldLabel.textContent = label;
+
+  const input = document.createElement('input');
+  input.id = `arg-${arg.dest}`;
+  input.dataset.arg = arg.dest;
+  input.dataset.type = arg.type;
+  input.className = 'w-full rounded-xl border px-4 py-2.5 text-sm focus:outline-none transition';
+  input.placeholder = placeholder;
+  input.type = type;
+
+  const defaultValue = resolveDefaultValue(arg);
+  if (defaultValue !== undefined && defaultValue !== null && defaultValue !== '') {
+    input.value = defaultValue;
+  }
+
+  container.appendChild(fieldLabel);
+  container.appendChild(input);
+
+  return { container, input };
+};
+
+const createLlmSection = (llmArgs) => {
+  const providerArg = llmArgs.ai_provider;
+  if (!providerArg) {
+    return null;
+  }
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'rounded-2xl border border-slate-700/40 bg-slate-900/30 p-5 space-y-4 shadow-inner shadow-slate-900/40';
+
+  const headerRow = document.createElement('div');
+  headerRow.className = 'flex flex-col gap-2';
+
+  const title = document.createElement('span');
+  title.className = 'text-sm font-semibold text-slate-100 tracking-wide';
+  title.textContent = 'LLM Provider';
+
+  const description = document.createElement('p');
+  description.className = 'text-xs text-slate-400 leading-relaxed';
+  description.textContent = 'Choose which large language model to use and provide the required connection details.';
+
+  headerRow.appendChild(title);
+  headerRow.appendChild(description);
+
+  const select = document.createElement('select');
+  select.id = `arg-${providerArg.dest}`;
+  select.dataset.arg = providerArg.dest;
+  select.dataset.type = providerArg.type;
+  select.className = 'w-full rounded-xl border px-4 py-2.5 text-sm focus:outline-none transition';
+
+  const placeholderOption = document.createElement('option');
+  placeholderOption.value = '';
+  placeholderOption.textContent = 'Select a provider…';
+  select.appendChild(placeholderOption);
+
+  (providerArg.choices || []).forEach((choice) => {
+    const option = document.createElement('option');
+    option.value = choice;
+    option.textContent = titleCase(choice);
+    select.appendChild(option);
+  });
+
+  const defaults = resolveDefaultValue(providerArg);
+  if (defaults !== '') {
+    select.value = defaults;
+  }
+
+  const fieldContainer = document.createElement('div');
+  fieldContainer.className = 'space-y-4';
+
+  const providerDescriptions = {
+    llama: 'Use the official Llama API. Provide your API key to authenticate requests.',
+    gemini: 'Connect to Google Gemini services with your API key.',
+    ollama: 'Connect to a self-hosted Ollama endpoint by specifying the base URL and model.',
+  };
+
+  const activeDescription = document.createElement('p');
+  activeDescription.className = 'text-xs text-slate-300 leading-relaxed hidden';
+
+  const providers = {};
+
+  if (llmArgs.llama_key) {
+    const llamaInput = createLlmInput(llmArgs.llama_key, {
+      label: 'Llama API Key',
+      placeholder: 'Enter your Llama API key',
+    });
+    providers.llama = [llamaInput];
+    fieldContainer.appendChild(llamaInput.container);
+  }
+
+  if (llmArgs.gemini_key) {
+    const geminiInput = createLlmInput(llmArgs.gemini_key, {
+      label: 'Gemini API Key',
+      placeholder: 'Enter your Gemini API key',
+    });
+    providers.gemini = [geminiInput];
+    fieldContainer.appendChild(geminiInput.container);
+  }
+
+  const ollamaInputs = [];
+  if (llmArgs.ollama_url) {
+    ollamaInputs.push(
+      createLlmInput(llmArgs.ollama_url, {
+        label: 'Ollama API URL',
+        placeholder: 'http://localhost:11434/api/generate',
+      })
+    );
+  }
+  if (llmArgs.ollama_model) {
+    ollamaInputs.push(
+      createLlmInput(llmArgs.ollama_model, {
+        label: 'Ollama Model Name',
+        placeholder: 'Enter the model to request (e.g., gemma3:4b)',
+      })
+    );
+  }
+  if (ollamaInputs.length) {
+    providers.ollama = ollamaInputs;
+    ollamaInputs.forEach((input) => fieldContainer.appendChild(input.container));
+  }
+
+  const setActiveProvider = (provider) => {
+    Object.entries(providers).forEach(([name, inputs]) => {
+      const isActive = name === provider;
+      inputs.forEach(({ container, input }) => {
+        container.classList.toggle('hidden', !isActive);
+        input.disabled = !isActive;
+      });
+    });
+
+    if (provider && providerDescriptions[provider]) {
+      activeDescription.textContent = providerDescriptions[provider];
+      activeDescription.classList.remove('hidden');
+    } else {
+      activeDescription.textContent = '';
+      activeDescription.classList.add('hidden');
+    }
+  };
+
+  select.addEventListener('change', () => setActiveProvider(select.value));
+
+  wrapper.appendChild(headerRow);
+  wrapper.appendChild(select);
+  wrapper.appendChild(activeDescription);
+  wrapper.appendChild(fieldContainer);
+
+  const initialProvider = select.value || '';
+  setActiveProvider(initialProvider);
+
+  return { wrapper, select };
+};
+
 const buildForm = () => {
   settingsForm.innerHTML = '';
   let initialSource = null;
 
+  const llmArgs = {};
+  const pendingWrappers = [];
+
   cliArguments.forEach((arg) => {
+    if (LLM_ARGUMENT_KEYS.has(arg.dest)) {
+      llmArgs[arg.dest] = arg;
+      return;
+    }
+
     const { wrapper, inputElement } = createField(arg);
-    settingsForm.appendChild(wrapper);
+    pendingWrappers.push(wrapper);
 
     if (inputElement && arg.dest === 'source') {
       const updateImages = debounce(() => updateImageViewer(inputElement.value));
@@ -147,6 +322,13 @@ const buildForm = () => {
       }
     }
   });
+
+  const llmSection = createLlmSection(llmArgs);
+  if (llmSection) {
+    settingsForm.appendChild(llmSection.wrapper);
+  }
+
+  pendingWrappers.forEach((wrapper) => settingsForm.appendChild(wrapper));
 
   if (initialSource) {
     updateImageViewer(initialSource);
@@ -158,6 +340,10 @@ const buildForm = () => {
 const collectSettings = () => {
   const settings = {};
   document.querySelectorAll('[data-arg]').forEach((element) => {
+    if (element.disabled) {
+      return;
+    }
+
     const name = element.dataset.arg;
     const type = element.dataset.type;
 
